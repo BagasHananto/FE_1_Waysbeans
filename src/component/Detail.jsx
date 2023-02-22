@@ -4,17 +4,15 @@ import data from "./Dataproduct.json";
 
 import {Container, Button} from "react-bootstrap";
 console.log(data);
-export default function DetailComponent(){
+export default function Details(){
     const params = useParams();
     const id = parseInt(params.id)
     console.log(id);
-
-
     return (
         <div>
             <Container className="d-flex mt-5">
             <div className="d-flex gap-5 justify-content-center">
-                <img src={data[id].imagedetail} width="50%" alt=""/>
+                <img src={data[id].image} width="32%" alt=""/>
                 <div className="flex-column pt-5 pb-5">
                 <h1 className="fw-bold" style={{color:"#613D2B"}}>{data[id].productname}</h1>
                 <p className="card-text" style={{color:"#974A4A"}}>Stock : {data[id].stock}</p>
@@ -28,7 +26,5 @@ export default function DetailComponent(){
             
             </Container>
         </div>
-        
-
     );
 }
