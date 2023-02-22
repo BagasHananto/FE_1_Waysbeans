@@ -1,0 +1,31 @@
+[
+    {
+      "id": 1,
+      "productname": "Rwanda Beans",
+      "image": "./image/Product1.png",
+      "imagedetail": "./image/Product1.png",
+      "price": "Rp 299.000",
+      "stock": "200"
+    },
+    {
+      "id": 2,
+      "productname": "Ethiopia Beans",
+      "image": "./image/Product2.png",
+      "price": "Rp 109.000",
+      "stock": "99"
+    },
+    {
+      "id": 3,
+      "productname": "Guetamala Beans",
+      "image": "./image/Product3.png",
+      "price": "Rp 150.000",
+      "stock": "809"
+    },
+    {
+      "id": 4,
+      "productname": "Nicaragua Beans",
+      "image": "./image/Product4.png",
+      "price": "Rp 250.000",
+      "stock": "300"
+    }
+]
