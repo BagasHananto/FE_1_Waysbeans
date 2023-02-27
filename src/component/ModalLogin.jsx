@@ -1,48 +1,35 @@
-import { useContext, useState } from "react";
 import React from "react";
 import { Button, Modal, Form } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
-import data from "./Datauser.json";
-import { GlobalContext } from "../context/GlobalContext";
+import { Link } from "react-router-dom";
 
 export const ModalLogin = (props) => {
-  const navigate = useNavigate();
-
-  const { state } = useContext(GlobalContext);
-  const { setLogin } = state;
-
-  const [user, setUser] = useState({
-    name: "",
+  let dataUser = {
     email: "",
     password: "",
-  });
-
-  const handleInput = (e) => {
-    e.preventDefault();
-    let name = e.target.name;
-    let value = e.target.value;
-    setUser({ ...user, [name]: value });
   };
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-
-    const foundUser = data.find(
-      (e) => e.email === user.email && e.password === user.password
+  const handleLogin = () => {
+    const userData = JSON.parse(localStorage.getItem("users")) || [];
+    const findUser = userData.find(
+      (data) =>
+        dataUser.email === data.email && dataUser.password === data.password
     );
-    if (foundUser) {
-      setLogin(true);
-      navigate("/");
+    if (findUser) {
+      const session = {
+        email: findUser.email,
+        fullName: findUser.fullName,
+        isLogin: true,
+      };
+      localStorage.setItem("session_user", JSON.stringify(session));
+    } else {
+      alert("Login Failed!");
     }
   };
 
   return (
     <>
       <Modal show={props.show} onHide={props.onHide} centered>
-        <Form
-          className="pt-4 pb-4 ps-5 pe-5 bg-body rounded"
-          onSubmit={handleLogin}
-        >
+        <Form className="pt-4 pb-4 ps-5 pe-5 bg-body rounded">
           <h2
             style={{ color: "#613D2B" }}
             className="d-flex fw-bold mb-4 mt-3 justify-content-center"
@@ -53,8 +40,7 @@ export const ModalLogin = (props) => {
             <Form.Group className="mb-3">
               <Form.Control
                 type="text"
-                onChange={handleInput}
-                value={user.email}
+                onChange={(e) => (dataUser.email = e.target.value)}
                 name="email"
                 placeholder="Enter email"
                 style={{
@@ -66,8 +52,7 @@ export const ModalLogin = (props) => {
             <Form.Group className="mb-3">
               <Form.Control
                 type="password"
-                onChange={handleInput}
-                value={user.password}
+                onChange={(e) => (dataUser.password = e.target.value)}
                 name="password"
                 className="form-check-label"
                 placeholder="Password"
@@ -81,7 +66,7 @@ export const ModalLogin = (props) => {
               <Button
                 style={{ backgroundColor: "#613D2B", border: "none" }}
                 type="submit"
-                onClick={props.onHide}
+                onClick={handleLogin}
               >
                 Login
               </Button>
@@ -94,8 +79,7 @@ export const ModalLogin = (props) => {
               onClick={props.onClick}
               className="ms-1 text-decoration-none text-black fw-bold"
             >
-              {" "}
-              Here{" "}
+              Here
             </Link>
           </div>
         </Form>

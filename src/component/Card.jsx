@@ -3,9 +3,10 @@ import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export default function Card() {
+  const getProduct = JSON.parse(localStorage.getItem("products"));
   return (
     <Container className="d-flex justify-content-center mt-5 gap-5 mb-5 w-75">
-      {Product.map((item, index) => (
+      {getProduct.map((item, index) => (
         <div
           key={item.id}
           className="card rounded-0 border-white"

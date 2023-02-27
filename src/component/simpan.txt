@@ -1,0 +1,96 @@
+                {/* Conditional Login */}
+                
+                <div className="d-flex justify-content-center gap-1">
+                  <div style={{ marginTop: "10px" }}>
+                    <button
+                      style={{
+                        border: "none",
+                        backgroundColor: "transparent",
+                      }}
+                    >
+                      <Link to="/cart" className="d-flex gap-1">
+                        <div>
+                          <img
+                            src="./image/Keranjang.png"
+                            width="35px"
+                            height="32.26px"
+                            alt=""
+                          />
+                        </div>
+                        <div className="mt-2">
+                          <Badge className="rounded-5" bg="danger">
+                            1
+                          </Badge>
+                        </div>
+                      </Link>
+                    </button>
+                  </div>
+                  <div style={{ marginTop: "10px" }}>
+                    <NavDropdown align="end">
+                      <NavDropdown.Item>
+                        <Link
+                          className="d-flex text-decoration-none"
+                          style={{ color: "black" }}
+                          to="/profile"
+                        >
+                          <img
+                            src="./image/User.png"
+                            className="me-2"
+                            width="20px"
+                            height="20px"
+                            alt=""
+                          ></img>
+                          <div>Profile</div>
+                        </Link>
+                      </NavDropdown.Item>
+
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item className="d-flex">
+                        <img
+                          src="./image/Logout.png"
+                          className="me-2"
+                          width="20px"
+                          height="20px"
+                          alt=""
+                        ></img>
+                        <div>Log Out</div>
+                      </NavDropdown.Item>
+                    </NavDropdown>
+                  </div>
+                  <div>
+                    <img
+                      src="./image/Admin.png"
+                      style={{ marginTop: "10px" }}
+                      width="40px"
+                      height="40px"
+                      alt=""
+                    />
+                  </div>
+                </div>
+                ) : (
+
+
+                  const { state } = useContext(GlobalContext);
+  const { cart, setCart } = state;
+
+  const addProductCart = (e) => {
+    e.preventDefault();
+    const name = data[id].productname;
+    const price = data[id].price;
+    const addPrice = data[id].addPrice;
+    const quantity = 1;
+    const image = data[id].image;
+
+    const productIndex = cart.findIndex((item) => item.productname === name);
+
+    if (productIndex !== -1) {
+      const updateCart = [...cart];
+      updateCart[productIndex].price += updateCart[productIndex].price;
+      updateCart[productIndex].quantity += 1;
+      setCart(updateCart);
+    } else {
+      const maxId = data.reduce((max, product) => Math.max(max, product.id), 0);
+      const id = maxId + 1;
+      setCart([...cart, { id, name, price, addPrice, quantity, image }]);
+    }
+  };

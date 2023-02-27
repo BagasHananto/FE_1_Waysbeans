@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import Product from "./Dataproduct.json";
+import Product from "../Data/Dataproduct.json";
 
 export default function Profile() {
   return (
